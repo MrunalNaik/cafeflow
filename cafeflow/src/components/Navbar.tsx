@@ -69,11 +69,13 @@ export function Navbar() {
 
           <div className="flex items-center gap-4">
             <Dialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
-              <DialogTrigger asChild>
-                <button className="text-foreground/80 hover:text-primary transition-colors hidden sm:block">
-                  <Search className="h-5 w-5" />
-                </button>
-              </DialogTrigger>
+              <DialogTrigger
+                render={
+                  <button className="text-foreground/80 hover:text-primary transition-colors hidden sm:block">
+                    <Search className="h-5 w-5" />
+                  </button>
+                }
+              />
               <DialogContent className="sm:max-w-md">
                 <DialogHeader>
                   <DialogTitle>Search Menu</DialogTitle>
@@ -104,11 +106,13 @@ export function Navbar() {
             </button>
 
             <Dialog open={isBookOpen} onOpenChange={setIsBookOpen}>
-              <DialogTrigger asChild>
-                <Button variant="outline" className="hidden sm:inline-flex border-foreground text-foreground hover:bg-foreground hover:text-background rounded-full font-semibold">
-                  Book a Table
-                </Button>
-              </DialogTrigger>
+              <DialogTrigger
+                render={
+                  <Button variant="outline" className="hidden sm:inline-flex border-foreground text-foreground hover:bg-foreground hover:text-background rounded-full font-semibold">
+                    Book a Table
+                  </Button>
+                }
+              />
               <DialogContent className="sm:max-w-md">
                 {bookingComplete ? (
                   <div className="py-12 flex flex-col items-center justify-center space-y-4 text-center">

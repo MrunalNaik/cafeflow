@@ -153,11 +153,13 @@ export function CartDrawer() {
             </div>
             
             <Dialog open={isCheckoutOpen} onOpenChange={setIsCheckoutOpen}>
-              <DialogTrigger asChild>
-                <Button className="w-full h-12 bg-emerald-green hover:bg-emerald-green/90 text-white rounded-full text-lg shadow-lg shadow-emerald-green/20">
-                  Place Order
-                </Button>
-              </DialogTrigger>
+              <DialogTrigger
+                render={
+                  <Button className="w-full h-12 bg-emerald-green hover:bg-emerald-green/90 text-white rounded-full text-lg shadow-lg shadow-emerald-green/20">
+                    Place Order
+                  </Button>
+                }
+              />
               <DialogContent className="sm:max-w-md border-border bg-card">
                 <DialogHeader>
                   <DialogTitle className="font-heading text-2xl text-foreground">Complete Your Order</DialogTitle>
