@@ -1,6 +1,6 @@
 "use client";
 
-import { Coffee, Search, ShoppingBag, Menu, CheckCircle } from "lucide-react";
+import { Coffee, Search, ShoppingBag, Menu, CheckCircle, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useCart } from "@/context/CartContext";
@@ -15,6 +15,12 @@ import {
   DialogTrigger,
   DialogFooter,
 } from "@/components/ui/dialog";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
@@ -24,6 +30,7 @@ export function Navbar() {
   
   const [isBookOpen, setIsBookOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [bookingComplete, setBookingComplete] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -44,17 +51,22 @@ export function Navbar() {
 
   const handleSearch = () => {
     // In a real app, this would filter context or navigate.
-    // For now, close modal and scroll to menu
     setIsSearchOpen(false);
+    setIsMobileMenuOpen(false);
     window.location.hash = "menu";
+  };
+
+  const handleNavClick = (hash: string) => {
+    setIsMobileMenuOpen(false);
+    window.location.hash = hash;
   };
 
   return (
     <>
-      <nav className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/70 border-b border-border shadow-sm">
-        <div className="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-2">
-            <Coffee className="h-6 w-6 text-foreground" />
+      <nav className="sticky top-0 z-50 w-full backdrop-blur-md bg-white/85 border-b border-border shadow-sm">
+        <div className="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between w-full">
+          <a href="#" className="flex items-center gap-2 shrink-0">
+            <Coffee className="h-6 w-6 text-brand-orange" />
             <span className="font-heading font-bold text-xl tracking-tight text-foreground">
               CaféFlow
             </span>
@@ -67,16 +79,16 @@ export function Navbar() {
             <a href="#about" className="hover:text-primary transition-colors">About</a>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
             <Dialog open={isSearchOpen} onOpenChange={setIsSearchOpen}>
               <DialogTrigger
                 render={
-                  <button className="text-foreground/80 hover:text-primary transition-colors hidden sm:block">
+                  <button className="text-foreground/80 hover:text-primary transition-colors p-1.5 rounded-full hover:bg-muted">
                     <Search className="h-5 w-5" />
                   </button>
                 }
               />
-              <DialogContent className="sm:max-w-md">
+              <DialogContent className="w-[90vw] sm:max-w-md">
                 <DialogHeader>
                   <DialogTitle>Search Menu</DialogTitle>
                 </DialogHeader>
@@ -94,12 +106,13 @@ export function Navbar() {
             </Dialog>
             
             <button 
-              className="relative text-foreground/80 hover:text-primary transition-colors"
+              className="relative text-foreground/80 hover:text-primary transition-colors p-1.5 rounded-full hover:bg-muted"
               onClick={() => setIsCartOpen(true)}
+              aria-label="Shopping Cart"
             >
               <ShoppingBag className="h-5 w-5" />
               {totalItems > 0 && (
-                <Badge className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center p-0 bg-primary text-white rounded-full text-xs border border-white">
+                <Badge className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 bg-primary text-white rounded-full text-xs border border-white">
                   {totalItems}
                 </Badge>
               )}
@@ -113,7 +126,7 @@ export function Navbar() {
                   </Button>
                 }
               />
-              <DialogContent className="sm:max-w-md">
+              <DialogContent className="w-[92vw] sm:max-w-md">
                 {bookingComplete ? (
                   <div className="py-12 flex flex-col items-center justify-center space-y-4 text-center">
                     <CheckCircle className="h-16 w-16 text-emerald-green animate-bounce" />
@@ -155,12 +168,58 @@ export function Navbar() {
               </DialogContent>
             </Dialog>
 
-            <button className="md:hidden text-foreground">
+            {/* Mobile Menu Button */}
+            <button 
+              className="md:hidden text-foreground p-1.5 rounded-lg hover:bg-muted transition-colors"
+              onClick={() => setIsMobileMenuOpen(true)}
+              aria-label="Open Navigation Menu"
+            >
               <Menu className="h-6 w-6" />
             </button>
           </div>
         </div>
       </nav>
+
+      {/* Mobile Navigation Drawer */}
+      <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+        <SheetContent side="right" className="w-[80vw] max-w-xs bg-background border-border p-6 flex flex-col justify-between">
+          <div className="space-y-6">
+            <SheetHeader className="text-left pb-4 border-b border-border">
+              <div className="flex items-center gap-2">
+                <Coffee className="h-6 w-6 text-brand-orange" />
+                <SheetTitle className="font-heading font-bold text-xl text-foreground">CaféFlow</SheetTitle>
+              </div>
+            </SheetHeader>
+            <div className="flex flex-col gap-4 text-lg font-medium text-foreground">
+              <button onClick={() => handleNavClick("menu")} className="text-left py-2 hover:text-primary transition-colors border-b border-border/50">
+                Our Menu
+              </button>
+              <button onClick={() => handleNavClick("shop")} className="text-left py-2 hover:text-primary transition-colors border-b border-border/50">
+                Shop
+              </button>
+              <button onClick={() => handleNavClick("testimonials")} className="text-left py-2 hover:text-primary transition-colors border-b border-border/50">
+                Testimonials
+              </button>
+              <button onClick={() => handleNavClick("about")} className="text-left py-2 hover:text-primary transition-colors border-b border-border/50">
+                About
+              </button>
+            </div>
+          </div>
+
+          <div className="space-y-3 pt-6 border-t border-border">
+            <Button
+              className="w-full bg-brand-orange hover:bg-brand-orange/90 text-white rounded-full font-semibold"
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                setIsBookOpen(true);
+              }}
+            >
+              Book a Table
+            </Button>
+          </div>
+        </SheetContent>
+      </Sheet>
+
       <CartDrawer />
     </>
   );

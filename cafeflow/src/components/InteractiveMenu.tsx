@@ -41,13 +41,13 @@ export function InteractiveMenu() {
   });
 
   return (
-    <section className="py-16 md:py-24 bg-background">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="text-center mb-12">
-          <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">
+    <section className="py-12 md:py-24 bg-background w-full">
+      <div className="container mx-auto px-4 md:px-6 w-full">
+        <div className="text-center mb-10 md:mb-12">
+          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-3 sm:mb-4">
             Our Menu
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-sm sm:text-base max-w-2xl mx-auto">
             Welcome to CaféFlow. Here, we pride ourselves on offering a diverse selection
             of beverages and treats that cater to every taste.
           </p>
