@@ -48,36 +48,36 @@ export function Hero() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-background pt-12 pb-24 md:pt-20 md:pb-32">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+      <section className="relative overflow-hidden bg-background pt-8 pb-20 md:pt-20 md:pb-32 w-full">
+        <div className="container mx-auto px-4 md:px-6 w-full">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center w-full">
             <motion.div 
-              className="flex flex-col items-start gap-6 relative z-10"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
+              className="flex flex-col items-start gap-5 sm:gap-6 relative z-10 w-full"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-sm font-medium">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-xs sm:text-sm font-medium">
                 <span className="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
                 New seasonal blends available
               </div>
-              <h1 className="font-heading text-5xl md:text-7xl font-bold leading-tight text-foreground">
+              <h1 className="font-heading text-3xl sm:text-5xl md:text-7xl font-bold leading-tight text-foreground">
                 The Perfect Blend of <br/>
                 <span className="text-primary italic">Aroma &amp; Ambiance</span>
               </h1>
-              <p className="text-lg text-muted-foreground max-w-md">
+              <p className="text-base sm:text-lg text-muted-foreground max-w-md">
                 We&apos;re committed to ethical sourcing and sustainable practices for a better coffee experience.
               </p>
-              <div className="flex gap-4 mt-2 flex-wrap">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-2 w-full sm:w-auto">
                 <Button
                   size="lg"
-                  className="bg-brand-orange hover:bg-brand-orange/90 text-white rounded-full px-8 text-base shadow-lg shadow-brand-orange/20"
+                  className="bg-brand-orange hover:bg-brand-orange/90 text-white rounded-full px-8 text-base shadow-lg shadow-brand-orange/20 w-full sm:w-auto justify-center"
                   onClick={() => setIsSpecialsOpen(true)}
                 >
                   Explore Our Specials
                 </Button>
-                <a href="#menu">
-                  <Button size="lg" variant="outline" className="rounded-full px-8 text-base border-foreground text-foreground hover:bg-foreground hover:text-background">
+                <a href="#menu" className="w-full sm:w-auto">
+                  <Button size="lg" variant="outline" className="rounded-full px-8 text-base border-foreground text-foreground hover:bg-foreground hover:text-background w-full sm:w-auto justify-center">
                     View Full Menu
                   </Button>
                 </a>
@@ -85,12 +85,12 @@ export function Hero() {
             </motion.div>
 
             <motion.div 
-              className="relative"
+              className="relative w-full"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             >
-              <div className="relative aspect-square md:aspect-[4/5] w-full max-w-lg mx-auto overflow-hidden rounded-t-[100px] rounded-b-[40px] border-[8px] border-white shadow-2xl">
+              <div className="relative aspect-square md:aspect-[4/5] w-full max-w-sm md:max-w-lg mx-auto overflow-hidden rounded-t-[80px] sm:rounded-t-[100px] rounded-b-[30px] sm:rounded-b-[40px] border-[6px] sm:border-[8px] border-white shadow-2xl">
                 <Image
                   src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=95&fit=crop"
                   alt="A perfect cup of coffee"
@@ -99,19 +99,19 @@ export function Hero() {
                   priority
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
-                <div className="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-t-[92px] rounded-b-[32px]"></div>
+                <div className="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-t-[74px] sm:rounded-t-[92px] rounded-b-[24px] sm:rounded-b-[32px]"></div>
               </div>
               
               {/* Decorative elements */}
-              <div className="absolute -top-10 -right-10 w-40 h-40 bg-secondary rounded-full blur-3xl opacity-50 -z-10"></div>
-              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl opacity-50 -z-10"></div>
+              <div className="absolute -top-10 -right-10 w-40 h-40 bg-secondary rounded-full blur-3xl opacity-50 -z-10 pointer-events-none"></div>
+              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl opacity-50 -z-10 pointer-events-none"></div>
             </motion.div>
           </div>
         </div>
         
         {/* Wavy bottom divider */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden line-height-0">
-          <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-full h-12 md:h-20 text-muted/30">
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden line-height-0 pointer-events-none">
+          <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-full h-8 sm:h-12 md:h-20 text-muted/30">
             <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C52.16,104.79,101.44,98.67,149.8,88.7,208.5,76.54,267.43,67.15,321.39,56.44Z" className="fill-current"></path>
           </svg>
         </div>

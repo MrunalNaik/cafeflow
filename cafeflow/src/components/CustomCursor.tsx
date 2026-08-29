@@ -55,6 +55,7 @@ interface Ripple {
 
 export function CustomCursor() {
   const [mounted, setMounted] = useState(false);
+  const [isPointerFine, setIsPointerFine] = useState(false);
   const [designIndex, setDesignIndex] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
@@ -94,7 +95,14 @@ export function CustomCursor() {
   }, []);
 
   useEffect(() => {
+    // Only enable on desktop with fine pointer
+    const mediaQuery = window.matchMedia("(pointer: fine) and (hover: hover)");
+    if (!mediaQuery.matches) {
+      return;
+    }
+    setIsPointerFine(true);
     setMounted(true);
+
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("click", handleClick);
     window.addEventListener("mousedown", handleMouseDown);
@@ -109,7 +117,7 @@ export function CustomCursor() {
     };
   }, [handleMouseMove, handleClick, handleMouseDown, handleMouseUp, handleMouseOver]);
 
-  if (!mounted) return null;
+  if (!mounted || !isPointerFine) return null;
 
   const CurrentDesign = CURSOR_DESIGNS[designIndex].render;
 
